@@ -15,7 +15,7 @@ void Human_Resource();
 void Employee();
 void New_employee();
 
-struct add_Employee{
+struct add_Employee {
     string NRC;
     string Name;
     string Surname;
@@ -32,49 +32,52 @@ struct add_Employee{
 void New_employee()
 {
     add_Employee Details[100];
-    for(int i = 1; i < 2; i ++)
+    for(int i = 1; i < 2; i++)
     {
         cout << "\t\t\t\tEnter NRC No/Passport No: ";
         cin.ignore();
         getline(cin, Details[i].NRC);
+        
         cout << "\t\t\t\tEnter Your Name: ";
-        cin.ignore();
-        getline(cin,Details[i].Name);
+        getline(cin, Details[i].Name);
+        
         cout << "\t\t\t\tEnter your Surname: ";
-        cin.ignore();
         getline(cin, Details[i].Surname);
+        
         cout << "\t\t\t\tEnter Age: ";
         cin >> Details[i].Age;
+        
         cout << "\t\t\t\tEnter Basic Salary: ";
         cin >> Details[i].Basic_salary;
+        cin.ignore(); // Ignore the newline after the last input
+        
         cout << "\t\t\t\tEnter Department: ";
-        cin.ignore();
         getline(cin, Details[i].Department);
+        
         cout << "\t\t\t\tEnter Tax Percentage: ";
         cin >> Details[i].Tax_Amount;
         Details[i].Tax_Amount = (Details[i].Tax_Amount /100) * Details[i].Basic_salary;
+        
         cout << "\t\t\t\tEnter NAPSA Percentage: ";
         cin >> Details[i].NAPSA;
         Details[i].NAPSA = (Details[i].NAPSA /100) * Details[i].Basic_salary;
+        
         cout << "\t\t\t\tEnter NHIMA Percentage: ";
         cin >> Details[i].NHIMA;
         Details[i].NHIMA = (Details[i].NHIMA /100) * Details[i].Basic_salary;
-        //deduction
-        Deduction = Details[i].Tax_Amount - Details[i].NAPSA - Details[i].NHIMA;
-        // Net Pay
-        Details[i].Net_Pay = Details[i].Basic_salary - Deduction;
 
+        Details[i].Net_Pay = Details[i].Basic_salary - (Details[i].Tax_Amount + Details[i].NAPSA + Details[i].NHIMA); //Difference between the basic salary and the deductions, which have been added 
+
+        cin.ignore(); // Ignore the newline after the last input
         cout << "\t\t\t\tEnter Employment Status: ";
-        cin.ignore();
         getline(cin, Details[i].Employment_Status);
     }
 
     fstream details;
-    details.open("New Employee.txt", ios :: app);
+    details.open("New Employee.txt", ios::app);
     details << "\t NRC No/ PASSPORT No \t First Name \t Surname \t Age\t Basic Salary\t Department \t Tax Amount(PAYE) \t NAPSA Contribution \t NHIMA \t Net Pay \t Employmnet Status \n";
-    for (int  i = 1; i < 2; i ++ )
+    for (int i = 1; i < 2; i++)
     {
-
         details << "\t " << Details[i].NRC;
         details << "\t " << Details[i].Name;
         details << "\t\t " << Details[i].Surname;
@@ -85,7 +88,7 @@ void New_employee()
         details << "\t\t " << Details[i].NAPSA;
         details << "\t\t " << Details[i].NHIMA;
         details << "\t\t " << Details[i].Net_Pay;
-        details << "\t\t " << Details[i].Employment_Status <<endl;
+        details << "\t\t " << Details[i].Employment_Status << endl;
     }
 }
 
@@ -107,7 +110,6 @@ void Hi_Header()
     cout << "\t\t\t\t\t *\t*\t*"<<endl;
     Sleep(100);
     system("cls");
-
 }
 
 void Welcome()
